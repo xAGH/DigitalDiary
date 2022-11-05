@@ -79,6 +79,7 @@ def update_contact(
 
 @router.get("/{id}", response_model=ResponseSchema)
 def read_contact(
+    res: Response,
     id: int,
     db: Session = Depends(get_db)
 ) -> ResponseSchema:
@@ -86,6 +87,7 @@ def read_contact(
     contact = contact_service.get(id=id, db=db)
 
     if contact is None:
+        res.status_code = HTTPStatus.NOT_FOUND
         return not_found
 
     return ResponseSchema(body=contact)
@@ -93,6 +95,7 @@ def read_contact(
 
 @router.delete("/{id}", response_model=ResponseSchema)
 def delete_contact(
+    res: Response,
     id: int,
     db: Session = Depends(get_db),
 ) -> ResponseSchema:
@@ -100,6 +103,7 @@ def delete_contact(
     contact = contact_service.get(id=id, db=db)
 
     if contact is None:
+        res.status_code = HTTPStatus.NOT_FOUND
         return not_found
 
     return ResponseSchema(body=contact_service.remove(id=id, db=db))

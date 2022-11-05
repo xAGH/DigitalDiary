@@ -34,6 +34,7 @@ class CRUDContact(CRUDBase[Contact, ContactCreate, ContactUpdate]):
         return (
             db.query(self.model)
             .filter(Contact.user_id == user_id)
+            .filter(Contact.deleted_at == None)
             .offset(skip)
             .limit(limit)
             .all()

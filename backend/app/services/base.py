@@ -15,7 +15,10 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self.model = model
 
     def get(self, *, id: int, db: Session) -> Optional[ModelType]:
-        return db.query(self.model).filter(self.model.id == id).first()
+        return db.query(self.model)\
+            .filter(self.model.id == id)\
+            .filter(self.model.deleted_at == None)\
+            .first()
 
     def get_multi(
         self,
@@ -24,7 +27,11 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         limit: int = 100,
         db: Session
     ) -> list[ModelType]:
-        return db.query(self.model).offset(skip).limit(limit).all()
+        return db.query(self.model)\
+            .filter(self.model.deleted_at == None)\
+            .offset(skip)\
+            .limit(limit)\
+            .all()
 
     def create(self, *, model: CreateSchemaType, db: Session) -> ModelType:
         model_data = jsonable_encoder(model)

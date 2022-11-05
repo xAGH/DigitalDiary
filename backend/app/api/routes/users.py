@@ -73,10 +73,10 @@ def update_user(
         return not_found
 
     return ResponseSchema(
-        body=body)
+        body=user_service.update(to_update=user, user=body, db=db))
 
 
-@router.delete("/{id}", response_model=ResponseSchema)
+@router.delete("/", response_model=ResponseSchema)
 def delete_user(
         res: Response,
         user: UserModel = Depends(get_current_user),
@@ -93,4 +93,6 @@ def delete_user(
         res.status_code = HTTPStatus.NOT_FOUND
         return not_found
 
-    return user_service.remove(id=user.id, db=db)
+    res.status_code = HTTPStatus.NO_CONTENT
+    user_service.remove(id=user.id, db=db)
+    return ResponseSchema()
