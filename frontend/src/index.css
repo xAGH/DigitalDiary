@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-symbols-outlined {
+  @apply select-none;
+}
+
+body {
+  @apply font-openSans font-light;
+}
+
+::-webkit-scrollbar {
+  @apply bg-transparent hidden;
+}
