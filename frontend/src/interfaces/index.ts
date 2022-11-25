@@ -1,0 +1,11 @@
+export type { default as ContactProps } from "@interfaces/ContactProps";
+export type { default as InputProps } from "@interfaces/InputProps";
+export type { default as LetterProps } from "@interfaces/LetterProps";
+export type { default as OptinsProps } from "@interfaces/OptionsProps";
+export type { default as SearchProps } from "@interfaces/SearchProps";
+export type { default as ProfileProps } from "@interfaces/ProfileProps"; 
+export type { default as ProfileOptionsProps } from "@interfaces/ProfileOptionsProps";
+export type { default as AuthContextProps } from "@interfaces/AuthContextProps";
+export type { default as ContactsProps } from "@interfaces/ContactsProps"
+export type { default as IconProps } from "@interfaces/IconProps"
+export type { default as ContactFormProps } from "@interfaces/ContactFormProps"
